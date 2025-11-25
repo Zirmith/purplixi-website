@@ -305,7 +305,7 @@ window.addEventListener('scroll', throttle(() => {
 
 // ===== Live Players WebSocket Connection =====
 
-const API_SERVER_URL = 'localhost:3000'; // Change this to your deployed API URL
+const API_SERVER_URL = 'https://purplixi-api.onrender.com'; // Change this to your deployed API URL
 let ws = null;
 let reconnectInterval = null;
 
