@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Purplixi - A modern, powerful Minecraft launcher with advanced features, world management, and seamless authentication.">
+    <meta name="keywords" content="Minecraft, Launcher, Purplixi, Java, Mods, Gaming">
+    <title>Purplixi Launcher - Modern Minecraft Launcher</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-brand">
+                    <i class="ri-rocket-2-line brand-icon"></i>
+                    <span class="brand-name">Purplixi</span>
+                </div>
+                
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#features" class="nav-link">Features</a></li>
+                    <li><a href="#screenshots" class="nav-link">Screenshots</a></li>
+                    <li><a href="#download" class="nav-link">Download</a></li>
+                    <li><a href="changelog.html" class="nav-link">Changelog</a></li>
+                    <li><a href="docs.html" class="nav-link">Docs</a></li>
+                </ul>
+                
+                <div class="nav-actions">
+                    <button class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle Theme">
+                        <i class="ri-sun-line"></i>
+                    </button>
+                    <a href="#download" class="btn btn-primary">
+                        <i class="ri-download-line"></i>
+                        Download
+                    </a>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                        <i class="ri-menu-line"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-background">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+        </div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="ri-sparkling-line"></i>
+                    <span>Version 2.8.0 - Now Available</span>
+                </div>
+                
+                <h1 class="hero-title">
+                    The <span class="gradient-text">Modern</span> Way to<br>
+                    Play Minecraft
+                </h1>
+                
+                <p class="hero-description">
+                    Experience Minecraft like never before with Purplixi - a powerful, feature-rich launcher
+                    with advanced Java management, world backups, mod support, and seamless Microsoft authentication.
+                </p>
+                
+                <div class="hero-actions">
+                    <a href="#download" class="btn btn-primary btn-lg">
+                        <i class="ri-download-cloud-line"></i>
+                        <span>Download Now</span>
+                    </a>
+                    <a href="#features" class="btn btn-outline btn-lg">
+                        <i class="ri-play-circle-line"></i>
+                        <span>Explore Features</span>
+                    </a>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">2.8.0</div>
+                        <div class="stat-label">Latest Version</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-value">31+</div>
+                        <div class="stat-label">Popular Servers</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-value">100%</div>
+                        <div class="stat-label">Free & Open</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <div class="launcher-window">
+                    <div class="window-header">
+                        <div class="window-controls">
+                            <span class="control-dot red"></span>
+                            <span class="control-dot yellow"></span>
+                            <span class="control-dot green"></span>
+                        </div>
+                        <span class="window-title">Purplixi Launcher</span>
+                    </div>
+                    <div class="window-content">
+                        <div class="launcher-preview">
+                            <div class="preview-sidebar">
+                                <div class="preview-nav-item active"></div>
+                                <div class="preview-nav-item"></div>
+                                <div class="preview-nav-item"></div>
+                                <div class="preview-nav-item"></div>
+                            </div>
+                            <div class="preview-main">
+                                <div class="preview-header"></div>
+                                <div class="preview-cards">
+                                    <div class="preview-card"></div>
+                                    <div class="preview-card"></div>
+                                    <div class="preview-card"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Players Section -->
+    <section class="live-players">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">
+                    <i class="ri-live-line"></i> Live Now
+                </span>
+                <h2 class="section-title">Active Players</h2>
+                <p class="section-description">
+                    See who's playing with Purplixi right now
+                </p>
+            </div>
+            
+            <div class="live-stats">
+                <div class="live-stat">
+                    <div class="stat-icon">
+                        <i class="ri-user-line"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="online-count">0</div>
+                        <div class="stat-text">Online Now</div>
+                    </div>
+                </div>
+                <div class="live-stat">
+                    <div class="stat-icon">
+                        <i class="ri-rocket-line"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="total-launches">0</div>
+                        <div class="stat-text">Total Launches</div>
+                    </div>
+                </div>
+                <div class="live-stat">
+                    <div class="stat-icon">
+                        <i class="ri-time-line"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="total-playtime">0h</div>
+                        <div class="stat-text">Total Playtime</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="players-container">
+                <div id="players-list" class="players-grid">
+                    <!-- Players will be populated here -->
+                    <div class="no-players">
+                        <i class="ri-user-search-line"></i>
+                        <p>No players online right now</p>
+                        <small>Be the first to launch!</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="api-connection-status">
+                <div class="connection-indicator" id="connection-status">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Connecting...</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Features</span>
+                <h2 class="section-title">Everything You Need, and More</h2>
+                <p class="section-description">
+                    Packed with powerful features to enhance your Minecraft experience
+                </p>
+            </div>
+            
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="ri-java-line"></i>
+                    </div>
+                    <h3 class="feature-title">Advanced Java Management</h3>
+                    <p class="feature-description">
+                        Automatic Java detection, version validation, memory testing, and smart recommendations. Supports custom paths and multiple installations with auto-scanning.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="ri-check-line"></i> Auto-scan on startup</li>
+                        <li><i class="ri-check-line"></i> Search everywhere including Desktop</li>
+                        <li><i class="ri-check-line"></i> Deep recursive scanning</li>
+                        <li><i class="ri-check-line"></i> Fixed Mac Java extraction</li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="ri-global-line"></i>
+                    </div>
+                    <h3 class="feature-title">World Management</h3>
+                    <p class="feature-description">
+                        Complete world control: edit properties, view players, track advancements, manage dimensions, and more. Full NBT support included.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="ri-check-line"></i> Edit gamemode, difficulty, cheats</li>
+                        <li><i class="ri-check-line"></i> View players & advancements</li>
+                        <li><i class="ri-check-line"></i> Manage dimensions</li>
+                        <li><i class="ri-check-line"></i> Datapack guide & support</li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="ri-shield-check-line"></i>
+                    </div>
+                    <h3 class="feature-title">Microsoft Authentication</h3>
+                    <p class="feature-description">
+                        Secure Microsoft account integration with multi-account support. Switch between accounts seamlessly.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="ri-check-line"></i> Official Microsoft login</li>
+                        <li><i class="ri-check-line"></i> Multiple accounts</li>
+                        <li><i class="ri-check-line"></i> Secure token storage</li>
+                        <li><i class="ri-check-line"></i> Auto-refresh tokens</li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="ri-server-line"></i>
+                    </div>
+                    <h3 class="feature-title">Server Browser</h3>
+                    <p class="feature-description">
+                        Browse and connect to 31+ popular Minecraft servers. Live player counts and server status.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="ri-check-line"></i> 31+ popular servers</li>
+                        <li><i class="ri-check-line"></i> Real-time status</li>
+                        <li><i class="ri-check-line"></i> Quick connect</li>
+                        <li><i class="ri-check-line"></i> Server categories</li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="ri-puzzle-line"></i>
+                    </div>
+                    <h3 class="feature-title">Mod Support</h3>
+                    <p class="feature-description">
+                        Install and manage mods effortlessly. Compatible with Forge, Fabric, and more.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="ri-check-line"></i> Easy mod installation</li>
+                        <li><i class="ri-check-line"></i> Version compatibility</li>
+                        <li><i class="ri-check-line"></i> Enable/disable mods</li>
+                        <li><i class="ri-check-line"></i> Mod management</li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="ri-palette-line"></i>
+                    </div>
+                    <h3 class="feature-title">Beautiful Themes</h3>
+                    <p class="feature-description">
+                        Choose from 7 stunning themes with custom accent colors and backgrounds.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="ri-check-line"></i> 7 beautiful themes</li>
+                        <li><i class="ri-check-line"></i> Custom backgrounds</li>
+                        <li><i class="ri-check-line"></i> Accent color options</li>
+                        <li><i class="ri-check-line"></i> Blur effects</li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 7: Play Time Tracking -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="ri-time-line"></i>
+                    </div>
+                    <h3 class="feature-title">Play Time Tracking</h3>
+                    <p class="feature-description">
+                        Track your gameplay sessions automatically. View total playtime, recent history, and version statistics.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="ri-check-line"></i> Automatic session tracking</li>
+                        <li><i class="ri-check-line"></i> Accurate play time recording</li>
+                        <li><i class="ri-check-line"></i> Recent history display</li>
+                        <li><i class="ri-check-line"></i> Per-version statistics</li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 8: Server Hosting -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="ri-cloud-line"></i>
+                    </div>
+                    <h3 class="feature-title">Server Hosting</h3>
+                    <p class="feature-description">
+                        Host your own Minecraft servers with auto-download of server JARs (Vanilla & Paper), Java management, and live console.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="ri-check-line"></i> Auto-download server JARs</li>
+                        <li><i class="ri-check-line"></i> Vanilla & Paper support</li>
+                        <li><i class="ri-check-line"></i> Auto Java detection</li>
+                        <li><i class="ri-check-line"></i> Live server console</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section class="screenshots" id="screenshots">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Gallery</span>
+                <h2 class="section-title">See It In Action</h2>
+                <p class="section-description">
+                    A glimpse into the beautiful and intuitive interface
+                </p>
+            </div>
+            
+            <div class="screenshots-grid">
+                <div class="screenshot-card">
+                    <div class="screenshot-placeholder">
+                        <i class="ri-home-line"></i>
+                        <span>Home Dashboard</span>
+                    </div>
+                </div>
+                <div class="screenshot-card">
+                    <div class="screenshot-placeholder">
+                        <i class="ri-cup-line"></i>
+                        <span>Java Settings</span>
+                    </div>
+                </div>
+                <div class="screenshot-card">
+                    <div class="screenshot-placeholder">
+                        <i class="ri-global-line"></i>
+                        <span>World Management</span>
+                    </div>
+                </div>
+                <div class="screenshot-card">
+                    <div class="screenshot-placeholder">
+                        <i class="ri-server-line"></i>
+                        <span>Server Browser</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download" id="download">
+        <div class="container">
+            <div class="download-content">
+                <div class="download-info">
+                    <span class="section-badge">Download</span>
+                    <h2 class="section-title">Ready to Get Started?</h2>
+                    <p class="section-description">
+                        Download Purplixi Launcher for your platform and start your enhanced Minecraft journey today.
+                    </p>
+                    
+                    <div class="platform-cards">
+                        <div class="platform-card">
+                            <i class="ri-windows-line"></i>
+                            <div class="platform-info">
+                                <h4>Windows</h4>
+                                <p>Windows 10 or later</p>
+                            </div>
+                            <a href="#" class="btn btn-primary">
+                                <i class="ri-download-line"></i>
+                                Download
+                            </a>
+                        </div>
+                        
+                        <div class="platform-card">
+                            <i class="ri-mac-line"></i>
+                            <div class="platform-info">
+                                <h4>macOS</h4>
+                                <p>macOS 10.15 or later</p>
+                            </div>
+                            <a href="#" class="btn btn-primary">
+                                <i class="ri-download-line"></i>
+                                Download
+                            </a>
+                        </div>
+                        
+                        <div class="platform-card">
+                            <i class="ri-ubuntu-line"></i>
+                            <div class="platform-info">
+                                <h4>Linux</h4>
+                                <p>Ubuntu, Debian, Arch</p>
+                            </div>
+                            <a href="#" class="btn btn-primary">
+                                <i class="ri-download-line"></i>
+                                Download
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="download-note">
+                        <i class="ri-information-line"></i>
+                        <span>Requires Java 8+ and Minecraft account</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <i class="ri-rocket-2-line brand-icon"></i>
+                        <span class="brand-name">Purplixi</span>
+                    </div>
+                    <p class="footer-description">
+                        A modern, powerful Minecraft launcher built for the community.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="ri-github-line"></i></a>
+                        <a href="#" class="social-link"><i class="ri-discord-line"></i></a>
+                        <a href="#" class="social-link"><i class="ri-twitter-x-line"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#download">Download</a></li>
+                        <li><a href="changelog.html">Changelog</a></li>
+                        <li><a href="docs.html">Documentation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="docs.html">Getting Started</a></li>
+                        <li><a href="docs.html#faq">FAQ</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">License</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Purplixi Launcher. Created by MiniMax Agent. All rights reserved.</p>
+                <p class="footer-disclaimer">Not affiliated with Mojang Studios or Microsoft</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scroll-top">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html>

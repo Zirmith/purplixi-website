@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Purplixi Launcher Documentation - Learn how to use all features">
+    <title>Documentation - Purplixi Launcher</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        .docs-page {
+            padding: 140px 0 100px;
+        }
+        
+        .docs-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 60px;
+        }
+        
+        .docs-sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+        
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .sidebar-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-tertiary);
+            padding: 12px 16px;
+        }
+        
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+        
+        .sidebar-link:hover,
+        .sidebar-link.active {
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--text-primary);
+        }
+        
+        .sidebar-link.active {
+            border-left: 3px solid var(--primary);
+        }
+        
+        .sidebar-link i {
+            font-size: 18px;
+            color: var(--primary);
+        }
+        
+        .docs-content {
+            max-width: 800px;
+        }
+        
+        .docs-section {
+            margin-bottom: 60px;
+            animation: slideUp 0.6s ease-out;
+        }
+        
+        .docs-section h2 {
+            font-size: 32px;
+            font-weight: 800;
+            font-family: 'Space Grotesk', sans-serif;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .docs-section h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 32px 0 16px;
+            color: var(--primary);
+        }
+        
+        .docs-section h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 24px 0 12px;
+        }
+        
+        .docs-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+        
+        .docs-section ul, .docs-section ol {
+            color: var(--text-secondary);
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+        
+        .docs-section li {
+            margin-bottom: 8px;
+            line-height: 1.7;
+        }
+        
+        .code-block {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+        
+        .code-block code {
+            color: var(--primary-light);
+        }
+        
+        .info-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px 20px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: var(--radius-md);
+            margin: 20px 0;
+        }
+        
+        .info-box i {
+            font-size: 20px;
+            color: var(--secondary);
+            margin-top: 2px;
+        }
+        
+        .info-box p {
+            margin: 0;
+            font-size: 14px;
+        }
+        
+        .warning-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px 20px;
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: var(--radius-md);
+            margin: 20px 0;
+        }
+        
+        .warning-box i {
+            font-size: 20px;
+            color: #f59e0b;
+            margin-top: 2px;
+        }
+        
+        .warning-box p {
+            margin: 0;
+            font-size: 14px;
+        }
+        
+        .steps-list {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+        }
+        
+        .steps-list li {
+            position: relative;
+            padding-left: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .steps-list li::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 50%;
+            font-size: 14px;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .feature-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .feature-table th,
+        .feature-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .feature-table th {
+            background: var(--bg-tertiary);
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .feature-table td {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        .keyboard-shortcut {
+            display: inline-block;
+            padding: 4px 8px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-light);
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 1024px) {
+            .docs-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .docs-sidebar {
+                position: static;
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-brand">
+                    <i class="ri-rocket-2-line brand-icon"></i>
+                    <span class="brand-name">Purplixi</span>
+                </div>
+                
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html#features" class="nav-link">Features</a></li>
+                    <li><a href="index.html#screenshots" class="nav-link">Screenshots</a></li>
+                    <li><a href="index.html#download" class="nav-link">Download</a></li>
+                    <li><a href="changelog.html" class="nav-link">Changelog</a></li>
+                    <li><a href="docs.html" class="nav-link active">Docs</a></li>
+                </ul>
+                
+                <div class="nav-actions">
+                    <a href="index.html#download" class="btn btn-primary">
+                        <i class="ri-download-line"></i>
+                        Download
+                    </a>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                        <i class="ri-menu-line"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Documentation Page -->
+    <section class="docs-page">
+        <div class="container">
+            <div class="docs-layout">
+                <!-- Sidebar -->
+                <aside class="docs-sidebar">
+                    <nav class="sidebar-nav">
+                        <span class="sidebar-title">Getting Started</span>
+                        <a href="#installation" class="sidebar-link active">
+                            <i class="ri-download-line"></i>
+                            Installation
+                        </a>
+                        <a href="#first-setup" class="sidebar-link">
+                            <i class="ri-settings-3-line"></i>
+                            First Setup
+                        </a>
+                        <a href="#authentication" class="sidebar-link">
+                            <i class="ri-shield-check-line"></i>
+                            Authentication
+                        </a>
+                        
+                        <span class="sidebar-title">Features</span>
+                        <a href="#java-management" class="sidebar-link">
+                            <i class="ri-java-line"></i>
+                            Java Management
+                        </a>
+                        <a href="#world-management" class="sidebar-link">
+                            <i class="ri-global-line"></i>
+                            World Management
+                        </a>
+                        <a href="#server-browser" class="sidebar-link">
+                            <i class="ri-server-line"></i>
+                            Server Browser
+                        </a>
+                        <a href="#mods" class="sidebar-link">
+                            <i class="ri-puzzle-line"></i>
+                            Mod Support
+                        </a>
+                        
+                        <span class="sidebar-title">Advanced</span>
+                        <a href="#jvm-arguments" class="sidebar-link">
+                            <i class="ri-code-line"></i>
+                            JVM Arguments
+                        </a>
+                        <a href="#shortcuts" class="sidebar-link">
+                            <i class="ri-keyboard-line"></i>
+                            Shortcuts
+                        </a>
+                        <a href="#faq" class="sidebar-link">
+                            <i class="ri-question-line"></i>
+                            FAQ
+                        </a>
+                    </nav>
+                </aside>
+                
+                <!-- Content -->
+                <main class="docs-content">
+                    <!-- Installation -->
+                    <section class="docs-section" id="installation">
+                        <h2>Installation</h2>
+                        <p>
+                            Purplixi Launcher is available for Windows, macOS, and Linux. Follow these steps to get started.
+                        </p>
+                        
+                        <h3>System Requirements</h3>
+                        <table class="feature-table">
+                            <tr>
+                                <th>Requirement</th>
+                                <th>Minimum</th>
+                                <th>Recommended</th>
+                            </tr>
+                            <tr>
+                                <td>OS</td>
+                                <td>Windows 10, macOS 10.15, Ubuntu 18.04</td>
+                                <td>Latest version</td>
+                            </tr>
+                            <tr>
+                                <td>RAM</td>
+                                <td>4 GB</td>
+                                <td>8 GB+</td>
+                            </tr>
+                            <tr>
+                                <td>Storage</td>
+                                <td>500 MB (launcher only)</td>
+                                <td>2 GB+</td>
+                            </tr>
+                            <tr>
+                                <td>Java</td>
+                                <td>Java 8+</td>
+                                <td>Java 17+</td>
+                            </tr>
+                        </table>
+                        
+                        <h3>Installation Steps</h3>
+                        <ol class="steps-list">
+                            <li>Download the installer for your operating system from the download page</li>
+                            <li>Run the installer and follow the on-screen instructions</li>
+                            <li>Launch Purplixi from your applications menu or desktop shortcut</li>
+                            <li>Sign in with your Microsoft account to start playing</li>
+                        </ol>
+                        
+                        <div class="info-box">
+                            <i class="ri-information-line"></i>
+                            <p>On macOS, you may need to allow the app in System Preferences > Security & Privacy if you see a security warning.</p>
+                        </div>
+                    </section>
+                    
+                    <!-- First Setup -->
+                    <section class="docs-section" id="first-setup">
+                        <h2>First Setup</h2>
+                        <p>
+                            After installing Purplixi, follow these steps to configure your launcher for the best experience.
+                        </p>
+                        
+                        <h3>Initial Configuration</h3>
+                        <ol class="steps-list">
+                            <li>Open Settings from the sidebar navigation</li>
+                            <li>Configure your Java settings - the launcher will auto-detect installed versions</li>
+                            <li>Set your preferred memory allocation (recommended: 4-8 GB)</li>
+                            <li>Choose your theme and appearance preferences</li>
+                            <li>Enable Discord Rich Presence if desired</li>
+                        </ol>
+                        
+                        <h3>Recommended Settings</h3>
+                        <p>For optimal performance, we recommend:</p>
+                        <ul>
+                            <li>Java 17+ for Minecraft 1.18 and newer</li>
+                            <li>4-8 GB RAM allocation for vanilla Minecraft</li>
+                            <li>8-16 GB RAM for modded gameplay</li>
+                            <li>Enable hardware acceleration</li>
+                        </ul>
+                    </section>
+                    
+                    <!-- Authentication -->
+                    <section class="docs-section" id="authentication">
+                        <h2>Authentication</h2>
+                        <p>
+                            Purplixi uses official Microsoft authentication to securely log into your Minecraft account.
+                        </p>
+                        
+                        <h3>Signing In</h3>
+                        <ol class="steps-list">
+                            <li>Click "Add Account" on the home page or accounts section</li>
+                            <li>A browser window will open for Microsoft login</li>
+                            <li>Sign in with your Microsoft account credentials</li>
+                            <li>Grant permissions when prompted</li>
+                            <li>Return to the launcher - you're now logged in!</li>
+                        </ol>
+                        
+                        <h3>Multiple Accounts</h3>
+                        <p>
+                            Purplixi supports multiple Microsoft accounts. You can switch between accounts from the accounts page.
+                        </p>
+                        
+                        <div class="warning-box">
+                            <i class="ri-error-warning-line"></i>
+                            <p>Never share your account credentials or auth tokens. Purplixi stores tokens securely and never transmits them to third parties.</p>
+                        </div>
+                    </section>
+                    
+                    <!-- Java Management -->
+                    <section class="docs-section" id="java-management">
+                        <h2>Java Management</h2>
+                        <p>
+                            Purplixi includes advanced Java management features to help you configure the optimal Java setup for Minecraft.
+                        </p>
+                        
+                        <h3>Automatic Detection</h3>
+                        <p>
+                            The launcher automatically scans your system for Java installations including:
+                        </p>
+                        <ul>
+                            <li>System Java (JAVA_HOME, PATH)</li>
+                            <li>Downloads folder installations</li>
+                            <li>Common installation directories</li>
+                            <li>Version managers (SDKMAN, Jabba)</li>
+                        </ul>
+                        
+                        <h3>Custom Java Path</h3>
+                        <p>
+                            To use a specific Java installation:
+                        </p>
+                        <div class="code-block">
+                            <code>/Users/username/Downloads/jdk-17.0.9/Contents/Home/bin/java</code>
+                        </div>
+                        
+                        <h3>Java Version Requirements</h3>
+                        <table class="feature-table">
+                            <tr>
+                                <th>Minecraft Version</th>
+                                <th>Required Java</th>
+                            </tr>
+                            <tr>
+                                <td>1.20.5+</td>
+                                <td>Java 21 (recommended)</td>
+                            </tr>
+                            <tr>
+                                <td>1.18 - 1.20.4</td>
+                                <td>Java 17+</td>
+                            </tr>
+                            <tr>
+                                <td>1.17.x</td>
+                                <td>Java 16/17</td>
+                            </tr>
+                            <tr>
+                                <td>1.16.5 and below</td>
+                                <td>Java 8</td>
+                            </tr>
+                        </table>
+                        
+                        <h3>Memory Testing</h3>
+                        <p>
+                            Use the "Test Memory" button to verify that Java can allocate your requested RAM amount.
+                        </p>
+                    </section>
+                    
+                    <!-- World Management -->
+                    <section class="docs-section" id="world-management">
+                        <h2>World Management</h2>
+                        <p>
+                            Manage your Minecraft worlds with import, backup, and restore functionality.
+                        </p>
+                        
+                        <h3>Importing Worlds</h3>
+                        <ol class="steps-list">
+                            <li>Go to the Worlds tab</li>
+                            <li>Click "Import World"</li>
+                            <li>Select your world folder</li>
+                            <li>The world will be copied to your saves directory</li>
+                        </ol>
+                        
+                        <h3>Creating Backups</h3>
+                        <ol class="steps-list">
+                            <li>Click "Create Backup" in the Worlds tab</li>
+                            <li>Select the world you want to backup</li>
+                            <li>The backup will be saved as a compressed ZIP file</li>
+                        </ol>
+                        
+                        <h3>Restoring Backups</h3>
+                        <p>
+                            Switch to the "Backups" tab to view and restore your saved backups. When restoring, your current world will automatically be backed up first for safety.
+                        </p>
+                        
+                        <div class="info-box">
+                            <i class="ri-information-line"></i>
+                            <p>Backups are stored in the launcher's data directory and include timestamps for easy identification.</p>
+                        </div>
+                    </section>
+                    
+                    <!-- Server Browser -->
+                    <section class="docs-section" id="server-browser">
+                        <h2>Server Browser</h2>
+                        <p>
+                            Browse and connect to popular Minecraft servers with real-time status information.
+                        </p>
+                        
+                        <h3>Featured Servers</h3>
+                        <p>
+                            The server browser includes 31+ popular servers across various categories:
+                        </p>
+                        <ul>
+                            <li><strong>Minigames:</strong> Hypixel, Mineplex, The Hive, etc.</li>
+                            <li><strong>Survival:</strong> EarthMC, 2b2t, etc.</li>
+                            <li><strong>Creative:</strong> Building servers</li>
+                            <li><strong>Factions:</strong> Competitive survival</li>
+                            <li><strong>Prison:</strong> Prison-themed gameplay</li>
+                            <li><strong>Skyblock:</strong> Island survival</li>
+                        </ul>
+                        
+                        <h3>Quick Connect</h3>
+                        <p>
+                            Click "Connect" on any server to automatically join after launching Minecraft.
+                        </p>
+                    </section>
+                    
+                    <!-- Mod Support -->
+                    <section class="docs-section" id="mods">
+                        <h2>Mod Support</h2>
+                        <p>
+                            Install and manage mods for Forge, Fabric, and other mod loaders.
+                        </p>
+                        
+                        <h3>Installing Mods</h3>
+                        <ol class="steps-list">
+                            <li>Go to the Mods tab</li>
+                            <li>Click "Add Mod" or drag and drop JAR files</li>
+                            <li>The mod will be added to your mods folder</li>
+                            <li>Enable/disable mods as needed</li>
+                        </ol>
+                        
+                        <h3>Mod Compatibility</h3>
+                        <p>
+                            Ensure your mods are compatible with your Minecraft and mod loader versions. The launcher will display warnings for incompatible mods.
+                        </p>
+                        
+                        <div class="warning-box">
+                            <i class="ri-error-warning-line"></i>
+                            <p>Only download mods from trusted sources like CurseForge or Modrinth. Never run mods from unknown sources.</p>
+                        </div>
+                    </section>
+                    
+                    <!-- JVM Arguments -->
+                    <section class="docs-section" id="jvm-arguments">
+                        <h2>JVM Arguments</h2>
+                        <p>
+                            Optimize Minecraft performance with custom JVM arguments.
+                        </p>
+                        
+                        <h3>Presets</h3>
+                        <p>Purplixi includes four built-in presets:</p>
+                        <ul>
+                            <li><strong>Default:</strong> No additional arguments</li>
+                            <li><strong>Performance:</strong> Optimized G1GC for best FPS</li>
+                            <li><strong>Low Memory:</strong> For systems with limited RAM</li>
+                            <li><strong>Modded:</strong> Optimized for modded Minecraft</li>
+                        </ul>
+                        
+                        <h3>Performance Arguments</h3>
+                        <div class="code-block">
+                            <code>-XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC</code>
+                        </div>
+                        
+                        <h3>Low Memory Arguments</h3>
+                        <div class="code-block">
+                            <code>-XX:+UseSerialGC -XX:+DisableExplicitGC -Xss512k</code>
+                        </div>
+                    </section>
+                    
+                    <!-- Keyboard Shortcuts -->
+                    <section class="docs-section" id="shortcuts">
+                        <h2>Keyboard Shortcuts</h2>
+                        <p>
+                            Navigate the launcher quickly with keyboard shortcuts.
+                        </p>
+                        
+                        <table class="feature-table">
+                            <tr>
+                                <th>Shortcut</th>
+                                <th>Action</th>
+                            </tr>
+                            <tr>
+                                <td><span class="keyboard-shortcut">Ctrl</span> + <span class="keyboard-shortcut">1</span></td>
+                                <td>Go to Home</td>
+                            </tr>
+                            <tr>
+                                <td><span class="keyboard-shortcut">Ctrl</span> + <span class="keyboard-shortcut">2</span></td>
+                                <td>Go to Versions</td>
+                            </tr>
+                            <tr>
+                                <td><span class="keyboard-shortcut">Ctrl</span> + <span class="keyboard-shortcut">3</span></td>
+                                <td>Go to Servers</td>
+                            </tr>
+                            <tr>
+                                <td><span class="keyboard-shortcut">Ctrl</span> + <span class="keyboard-shortcut">4</span></td>
+                                <td>Go to Mods</td>
+                            </tr>
+                            <tr>
+                                <td><span class="keyboard-shortcut">Ctrl</span> + <span class="keyboard-shortcut">5</span></td>
+                                <td>Go to Settings</td>
+                            </tr>
+                            <tr>
+                                <td><span class="keyboard-shortcut">Ctrl</span> + <span class="keyboard-shortcut">K</span></td>
+                                <td>Focus Search</td>
+                            </tr>
+                            <tr>
+                                <td><span class="keyboard-shortcut">Ctrl</span> + <span class="keyboard-shortcut">R</span></td>
+                                <td>Refresh Page</td>
+                            </tr>
+                            <tr>
+                                <td><span class="keyboard-shortcut">Esc</span></td>
+                                <td>Close Modal</td>
+                            </tr>
+                        </table>
+                    </section>
+                    
+                    <!-- FAQ -->
+                    <section class="docs-section" id="faq">
+                        <h2>Frequently Asked Questions</h2>
+                        
+                        <h4>Why won't Minecraft launch?</h4>
+                        <p>
+                            Check that you have the correct Java version installed for your Minecraft version. Use the Java Settings panel to validate your Java installation and test memory allocation.
+                        </p>
+                        
+                        <h4>How do I allocate more RAM?</h4>
+                        <p>
+                            Go to Settings > Java Settings and adjust the Maximum RAM slider. We recommend 4-8 GB for vanilla and 8-16 GB for modded.
+                        </p>
+                        
+                        <h4>Where are my worlds stored?</h4>
+                        <p>
+                            Worlds are stored in the standard Minecraft saves directory. Use the World Management feature to backup and manage your worlds.
+                        </p>
+                        
+                        <h4>How do I install Forge/Fabric?</h4>
+                        <p>
+                            Download and run the Forge or Fabric installer, then select the installed version in Purplixi's version selector.
+                        </p>
+                        
+                        <h4>Is my data safe?</h4>
+                        <p>
+                            Yes! Purplixi stores all data locally on your computer. Authentication tokens are encrypted and never shared with third parties.
+                        </p>
+                        
+                        <h4>How do I report a bug?</h4>
+                        <p>
+                            Visit our GitHub repository to report issues or join our Discord community for support.
+                        </p>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <i class="ri-rocket-2-line brand-icon"></i>
+                        <span class="brand-name">Purplixi</span>
+                    </div>
+                    <p class="footer-description">
+                        A modern, powerful Minecraft launcher built for the community.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="ri-github-line"></i></a>
+                        <a href="#" class="social-link"><i class="ri-discord-line"></i></a>
+                        <a href="#" class="social-link"><i class="ri-twitter-x-line"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#features">Features</a></li>
+                        <li><a href="index.html#download">Download</a></li>
+                        <li><a href="changelog.html">Changelog</a></li>
+                        <li><a href="docs.html">Documentation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="docs.html">Getting Started</a></li>
+                        <li><a href="docs.html#faq">FAQ</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">License</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Purplixi Launcher. Created by MiniMax Agent. All rights reserved.</p>
+                <p class="footer-disclaimer">Not affiliated with Mojang Studios or Microsoft</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="scroll-top" id="scroll-top">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Active sidebar link on scroll
+        const docsSections = document.querySelectorAll('.docs-section');
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        
+        function updateActiveSidebar() {
+            const scrollY = window.pageYOffset;
+            
+            docsSections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                    sidebarLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', updateActiveSidebar);
+    </script>
+</body>
+</html>

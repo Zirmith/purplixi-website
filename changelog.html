@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Purplixi Launcher Changelog - Track all updates and improvements">
+    <title>Changelog - Purplixi Launcher</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        .changelog-page {
+            padding: 180px 0 100px;
+        }
+        
+        .changelog-timeline {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .changelog-timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary) 0%, transparent 100%);
+        }
+        
+        .changelog-item {
+            position: relative;
+            padding-left: 80px;
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: slideUp 0.6s ease-out forwards;
+        }
+        
+        .changelog-item:nth-child(1) { animation-delay: 0.1s; }
+        .changelog-item:nth-child(2) { animation-delay: 0.2s; }
+        .changelog-item:nth-child(3) { animation-delay: 0.3s; }
+        .changelog-item:nth-child(4) { animation-delay: 0.4s; }
+        .changelog-item:nth-child(5) { animation-delay: 0.5s; }
+        .changelog-item:nth-child(6) { animation-delay: 0.6s; }
+        
+        .changelog-marker {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 32px rgba(139, 92, 246, 0.4);
+            font-size: 24px;
+            color: white;
+        }
+        
+        .changelog-marker.latest {
+            animation: pulse 2s infinite;
+        }
+        
+        .changelog-content {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            transition: var(--transition);
+        }
+        
+        .changelog-content:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .changelog-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        .changelog-version {
+            font-size: 28px;
+            font-weight: 800;
+            font-family: 'Space Grotesk', sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .changelog-date {
+            font-size: 14px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .changelog-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--primary);
+        }
+        
+        .changelog-changes {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .change-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: var(--radius-md);
+            font-size: 15px;
+            line-height: 1.6;
+            transition: var(--transition);
+        }
+        
+        .change-item:hover {
+            background: rgba(139, 92, 246, 0.1);
+            transform: translateX(4px);
+        }
+        
+        .change-item i {
+            color: var(--primary);
+            font-size: 18px;
+            margin-top: 2px;
+        }
+        
+        @media (max-width: 768px) {
+            .changelog-timeline::before {
+                left: 20px;
+            }
+            
+            .changelog-item {
+                padding-left: 60px;
+            }
+            
+            .changelog-marker {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+            
+            .changelog-content {
+                padding: 24px;
+            }
+            
+            .changelog-version {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-brand">
+                    <i class="ri-rocket-2-line brand-icon"></i>
+                    <span class="brand-name">Purplixi</span>
+                </div>
+                
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html#features" class="nav-link">Features</a></li>
+                    <li><a href="index.html#screenshots" class="nav-link">Screenshots</a></li>
+                    <li><a href="index.html#download" class="nav-link">Download</a></li>
+                    <li><a href="changelog.html" class="nav-link active">Changelog</a></li>
+                    <li><a href="docs.html" class="nav-link">Docs</a></li>
+                </ul>
+                
+                <div class="nav-actions">
+                    <a href="index.html#download" class="btn btn-primary">
+                        <i class="ri-download-line"></i>
+                        Download
+                    </a>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                        <i class="ri-menu-line"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Changelog Page -->
+    <section class="changelog-page">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Changelog</span>
+                <h1 class="section-title">Release History</h1>
+                <p class="section-description">
+                    Track all updates, improvements, and new features
+                </p>
+            </div>
+            
+            <div class="changelog-timeline">
+                <!-- Version 3.2.0 -->
+                <div class="changelog-item">
+                    <div class="changelog-marker latest">
+                        <i class="ri-server-fill"></i>
+                    </div>
+                    <div class="changelog-content">
+                        <div class="changelog-header">
+                            <div>
+                                <h2 class="changelog-version">Version 3.2.0</h2>
+                                <div class="changelog-date">
+                                    <i class="ri-calendar-line"></i>
+                                    <span>November 20, 2025</span>
+                                    <span class="changelog-badge">Latest</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="changelog-changes">
+                            <h3 style="color: var(--primary); margin: 16px 0 12px 0; font-size: 18px;">
+                                <i class="ri-server-fill"></i> Complete Server Management System
+                            </h3>
+                            <div class="change-item">
+                                <i class="ri-list-check"></i>
+                                <span><strong>NEW:</strong> Full Server Management - Start, stop, restart, and delete servers with one click</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-terminal-box-fill"></i>
+                                <span>Live Server Console with real-time log streaming and GitHub-themed terminal UI</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-command-line"></i>
+                                <span>Command Execution - Send commands directly to running servers (stop, list, say, etc.)</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-settings-3-fill"></i>
+                                <span>Server Settings Editor - Modify port, max players, gamemode, difficulty, MOTD, and more</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-grid-line"></i>
+                                <span>Beautiful Server Grid View showing all servers with live status indicators</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-folder-open-line"></i>
+                                <span>Quick Folder Access from right-click context menu</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-history-line"></i>
+                                <span>View Server Logs from current session or previous runs</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-error-warning-line"></i>
+                                <span>Error Highlighting in console with red text for easy debugging</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-time-line"></i>
+                                <span>Timestamped Logs with precise timestamps for every entry</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-record-circle-fill"></i>
+                                <span>Status Indicators showing live/offline states with real-time updates</span>
+                            </div>
+                            
+                            <h3 style="color: var(--accent); margin: 24px 0 12px 0; font-size: 18px;">
+                                <i class="ri-account-circle-fill"></i> Enhanced Account Manager
+                            </h3>
+                            <div class="change-item">
+                                <i class="ri-sort-asc"></i>
+                                <span><strong>NEW:</strong> Account Sorting - Sort by name (A-Z/Z-A) or date added (newest/oldest)</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-file-download-line"></i>
+                                <span>Export Accounts to JSON file (excluding sensitive tokens for security)</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-refresh-line"></i>
+                                <span>Bulk Token Refresh - Refresh all account tokens simultaneously</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-swap-line"></i>
+                                <span>Quick Account Switching with seamless transitions</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-checkbox-circle-line"></i>
+                                <span>Visual indicators for active/inactive account status</span>
+                            </div>
+                            
+                            <h3 style="color: var(--success); margin: 24px 0 12px 0; font-size: 18px;">
+                                <i class="ri-bug-fill"></i> Bug Fixes
+                            </h3>
+                            <div class="change-item">
+                                <i class="ri-checkbox-circle-fill"></i>
+                                <span>Fixed "No handler registered for 'account-select'" error</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-checkbox-circle-fill"></i>
+                                <span>Fixed servers not displaying in "My Servers" tab</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-checkbox-circle-fill"></i>
+                                <span>Fixed "Create First Server" button not working</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-checkbox-circle-fill"></i>
+                                <span>Server logs now display correctly in console view</span>
+                            </div>
+                            
+                            <h3 style="color: var(--warning); margin: 24px 0 12px 0; font-size: 18px;">
+                                <i class="ri-speed-fill"></i> Performance Improvements
+                            </h3>
+                            <div class="change-item">
+                                <i class="ri-rocket-line"></i>
+                                <span>Optimized server process management with efficient resource handling</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-database-2-line"></i>
+                                <span>Smart log storage - keeps last 1000 lines per server in memory</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-wireless-charging-line"></i>
+                                <span>Real-time log streaming without constant polling for better performance</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Version 3.1.0 -->
+                <div class="changelog-item">
+                    <div class="changelog-marker">
+                        <i class="ri-download-cloud-fill"></i>
+                    </div>
+                    <div class="changelog-content">
+                        <div class="changelog-header">
+                            <div>
+                                <h2 class="changelog-version">Version 3.1.0</h2>
+                                <div class="changelog-date">
+                                    <i class="ri-calendar-line"></i>
+                                    <span>November 19, 2025</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="changelog-changes">
+                            <div class="change-item">
+                                <i class="ri-image-2-line"></i>
+                                <span><strong>NEW:</strong> Resource Pack Version Selector with Modrinth API Integration</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-database-2-line"></i>
+                                <span>Datapack downloads with world-specific installation support</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-server-line"></i>
+                                <span>Server JAR downloads for all types using MCUtils.com API</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-cloud-line"></i>
+                                <span>Support for Vanilla, Paper, Spigot, Forge, Fabric, Purpur, and 15+ server types</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-hammer-line"></i>
+                                <span>Forge mod loader auto-installation with version selection modal</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-scissors-line"></i>
+                                <span>Fabric mod loader integration with automatic profile generation</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-folder-download-line"></i>
+                                <span>Beautiful version selection modals for all downloadable content</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-progress-3-line"></i>
+                                <span>Real-time download progress tracking with shimmer animations</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-file-check-line"></i>
+                                <span>Compatibility badges showing supported Minecraft versions</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-palette-line"></i>
+                                <span>Enhanced world details UI with premium glassmorphism styling</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-checkbox-circle-line"></i>
+                                <span>Dynamic server JAR type grid loaded from MCUtils API</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-star-line"></i>
+                                <span>Recommended, stable, and beta version indicators</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Version 3.0.0 -->
+                <div class="changelog-item">
+                    <div class="changelog-marker">
+                        <i class="ri-rocket-fill"></i>
+                    </div>
+                    <div class="changelog-content">
+                        <div class="changelog-header">
+                            <div>
+                                <h2 class="changelog-version">Version 3.0.0</h2>
+                                <div class="changelog-date">
+                                    <i class="ri-calendar-line"></i>
+                                    <span>November 19, 2025</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="changelog-changes">
+                            <div class="change-item">
+                                <i class="ri-edit-box-line"></i>
+                                <span><strong>NEW:</strong> World Editing Capabilities with NBT Data Modification</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-server-fill"></i>
+                                <span>Server Hosting Management with full instance control</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-play-circle-line"></i>
+                                <span>Start, stop, restart, and monitor server instances</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-terminal-box-line"></i>
+                                <span>Real-time server console output viewing and command execution</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-image-add-line"></i>
+                                <span>Resource Pack Manager with search and installation</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-database-line"></i>
+                                <span>Datapack Manager with world association and installation</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-folder-open-line"></i>
+                                <span>Browse thousands of online resource packs from Modrinth</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-upload-2-line"></i>
+                                <span>Upload and manage custom resource packs and datapacks</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-refresh-line"></i>
+                                <span>Refresh and view all installed packs with thumbnails</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-search-line"></i>
+                                <span>Powerful search functionality across all content types</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Version 2.6.0 -->
+                <div class="changelog-item">
+                    <div class="changelog-marker">
+                        <i class="ri-sparkling-fill"></i>
+                    </div>
+                    <div class="changelog-content">
+                        <div class="changelog-header">
+                            <div>
+                                <h2 class="changelog-version">Version 2.6.0</h2>
+                                <div class="changelog-date">
+                                    <i class="ri-calendar-line"></i>
+                                    <span>November 20, 2025</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="changelog-changes">
+                            <div class="change-item">
+                                <i class="ri-global-line"></i>
+                                <span><strong>NEW:</strong> Real-time Player Activity API Integration</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-wifi-line"></i>
+                                <span>Connect to Purplixi API server for live player tracking</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-shield-user-line"></i>
+                                <span>Privacy & Online Settings with granular controls</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-user-follow-line"></i>
+                                <span>Choose to show/hide username, version, world name, and server address</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-bar-chart-box-line"></i>
+                                <span>Live statistics: online players, total launches, total playtime</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-plug-line"></i>
+                                <span>WebSocket support for instant updates on the website</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-heart-pulse-line"></i>
+                                <span>Automatic heartbeat system to keep sessions alive</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-gamepad-line"></i>
+                                <span>Real-time status updates (Online, Playing, Idle)</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-earth-line"></i>
+                                <span>Display current world or server being played</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-spy-line"></i>
+                                <span>Anonymous mode option for privacy</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-test-tube-line"></i>
+                                <span>API connection testing from launcher settings</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-dashboard-3-line"></i>
+                                <span>Player activity dashboard on purplixi.com</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-rocket-2-line"></i>
+                                <span>Automatic connection/disconnection on launcher start/close</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-live-line"></i>
+                                <span>See who's playing what version and where in real-time</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-speed-line"></i>
+                                <span>Optimized with session cleanup and rate limiting</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Version 2.5.0 -->
+                <div class="changelog-item">
+                    <div class="changelog-marker">
+                        <i class="ri-java-fill"></i>
+                    </div>
+                    <div class="changelog-content">
+                        <div class="changelog-header">
+                            <div>
+                                <h2 class="changelog-version">Version 2.5.0</h2>
+                                <div class="changelog-date">
+                                    <i class="ri-calendar-line"></i>
+                                    <span>November 19, 2025</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="changelog-changes">
+                            <div class="change-item">
+                                <i class="ri-java-fill"></i>
+                                <span><strong>NEW:</strong> Advanced Java Settings panel with comprehensive configuration</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-dashboard-line"></i>
+                                <span>Current Java Status display showing path, version, vendor, and architecture</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-check-double-line"></i>
+                                <span>Java path validation with detailed information extraction</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-brain-line"></i>
+                                <span>System memory detection with smart RAM recommendations</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-search-2-line"></i>
+                                <span>Advanced Java detection: System scan, Downloads scan, and Deep scan</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-settings-4-line"></i>
+                                <span>JVM argument presets: Default, Performance, Low Memory, and Modded</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-flask-line"></i>
+                                <span>Memory allocation testing to verify Java can use requested RAM</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-code-line"></i>
+                                <span>Java environment variables display (JAVA_HOME, PATH)</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-list-check"></i>
+                                <span>Show all Java system properties in modal dialog</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-folder-open-line"></i>
+                                <span>Full path display for custom Java installations</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-price-tag-3-line"></i>
+                                <span>Source badges for Java installations (System, Downloads, Launcher, etc.)</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-file-copy-line"></i>
+                                <span>Copy Java path to clipboard functionality</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-database-line"></i>
+                                <span>Extended memory options up to 32GB</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-edit-box-line"></i>
+                                <span>JVM arguments now use textarea for better editing</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Version 2.4.0 -->
+                <div class="changelog-item">
+                    <div class="changelog-marker">
+                        <i class="ri-global-line"></i>
+                    </div>
+                    <div class="changelog-content">
+                        <div class="changelog-header">
+                            <div>
+                                <h2 class="changelog-version">Version 2.4.0</h2>
+                                <div class="changelog-date">
+                                    <i class="ri-calendar-line"></i>
+                                    <span>November 19, 2025</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="changelog-changes">
+                            <div class="change-item">
+                                <i class="ri-earth-line"></i>
+                                <span><strong>NEW:</strong> World Management tab with import, backup, and restore functionality</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-archive-line"></i>
+                                <span>Automated world backups with ZIP compression</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-restart-line"></i>
+                                <span>Restore worlds from backups with safety features</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-server-fill"></i>
+                                <span>Added 11 more popular servers (31 total servers now available)</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-search-eye-line"></i>
+                                <span>Enhanced Java detection: scans Downloads folder and all directories</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-folder-5-line"></i>
+                                <span>Smart JDK version detection from folder names</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-flashlight-line"></i>
+                                <span>All home page quick actions now fully functional</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-image-line"></i>
+                                <span>Quick access to Screenshots, Resource Packs, and Shader Packs folders</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-tools-line"></i>
+                                <span>Maintenance tools: Clear cache and calculate Minecraft installation size</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-speed-up-line"></i>
+                                <span>System performance monitoring (CPU, RAM usage)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Version 2.3.0 -->
+                <div class="changelog-item">
+                    <div class="changelog-marker">
+                        <i class="ri-game-line"></i>
+                    </div>
+                    <div class="changelog-content">
+                        <div class="changelog-header">
+                            <div>
+                                <h2 class="changelog-version">Version 2.3.0</h2>
+                                <div class="changelog-date">
+                                    <i class="ri-calendar-line"></i>
+                                    <span>November 19, 2025</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="changelog-changes">
+                            <div class="change-item">
+                                <i class="ri-bug-line"></i>
+                                <span>Fixed Minecraft crash issues with improved process handling</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-server-line"></i>
+                                <span>Added 20 popular servers with icons and categories</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-discord-line"></i>
+                                <span>Enhanced Discord RPC with custom status and button options</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-settings-3-line"></i>
+                                <span>Expanded settings: performance, appearance, and advanced options</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-terminal-box-line"></i>
+                                <span>Improved console with search, copy, and better filtering</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-palette-line"></i>
+                                <span>Added 6 new themes with custom accent colors</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Version 2.2.0 -->
+                <div class="changelog-item">
+                    <div class="changelog-marker">
+                        <i class="ri-cup-line"></i>
+                    </div>
+                    <div class="changelog-content">
+                        <div class="changelog-header">
+                            <div>
+                                <h2 class="changelog-version">Version 2.2.0</h2>
+                                <div class="changelog-date">
+                                    <i class="ri-calendar-line"></i>
+                                    <span>November 19, 2025</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="changelog-changes">
+                            <div class="change-item">
+                                <i class="ri-java-line"></i>
+                                <span>Added Java version management and auto-download</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-checkbox-circle-line"></i>
+                                <span>Automatic Java version detection for Minecraft versions</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-download-cloud-line"></i>
+                                <span>Download Java 8, 17, and 21 from Adoptium</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-information-line"></i>
+                                <span>Display required Java version for selected Minecraft version</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Version 2.1.0 -->
+                <div class="changelog-item">
+                    <div class="changelog-marker">
+                        <i class="ri-music-line"></i>
+                    </div>
+                    <div class="changelog-content">
+                        <div class="changelog-header">
+                            <div>
+                                <h2 class="changelog-version">Version 2.1.0</h2>
+                                <div class="changelog-date">
+                                    <i class="ri-calendar-line"></i>
+                                    <span>November 19, 2025</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="changelog-changes">
+                            <div class="change-item">
+                                <i class="ri-server-line"></i>
+                                <span>Added popular server browser with live status</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-spotify-line"></i>
+                                <span>Spotify Premium integration with playback controls</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-group-line"></i>
+                                <span>Real-time server player count checking</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-music-2-line"></i>
+                                <span>Music control while gaming</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Version 2.0.0 -->
+                <div class="changelog-item">
+                    <div class="changelog-marker">
+                        <i class="ri-rocket-line"></i>
+                    </div>
+                    <div class="changelog-content">
+                        <div class="changelog-header">
+                            <div>
+                                <h2 class="changelog-version">Version 2.0.0</h2>
+                                <div class="changelog-date">
+                                    <i class="ri-calendar-line"></i>
+                                    <span>November 19, 2025</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="changelog-changes">
+                            <div class="change-item">
+                                <i class="ri-discord-line"></i>
+                                <span>Added Discord Rich Presence integration</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-user-line"></i>
+                                <span>New Account Manager with multiple account support</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-bookmark-line"></i>
+                                <span>Profile Presets system</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-terminal-line"></i>
+                                <span>Enhanced Console with log filtering</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-notification-line"></i>
+                                <span>Advanced notification system</span>
+                            </div>
+                            <div class="change-item">
+                                <i class="ri-palette-line"></i>
+                                <span>Custom theme support with background images</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <i class="ri-rocket-2-line brand-icon"></i>
+                        <span class="brand-name">Purplixi</span>
+                    </div>
+                    <p class="footer-description">
+                        A modern, powerful Minecraft launcher built for the community.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="ri-github-line"></i></a>
+                        <a href="#" class="social-link"><i class="ri-discord-line"></i></a>
+                        <a href="#" class="social-link"><i class="ri-twitter-x-line"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#features">Features</a></li>
+                        <li><a href="index.html#download">Download</a></li>
+                        <li><a href="changelog.html">Changelog</a></li>
+                        <li><a href="docs.html">Documentation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="docs.html">Getting Started</a></li>
+                        <li><a href="docs.html#faq">FAQ</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">License</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Purplixi Launcher. Created by MiniMax Agent. All rights reserved.</p>
+                <p class="footer-disclaimer">Not affiliated with Mojang Studios or Microsoft</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="scroll-top" id="scroll-top">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

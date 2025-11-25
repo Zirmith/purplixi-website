@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Purplixi Launcher</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    
+    <style>
+        .error-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .error-content {
+            max-width: 500px;
+        }
+        
+        .error-code {
+            font-size: 150px;
+            font-weight: 900;
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 24px;
+        }
+        
+        .error-title {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+        
+        .error-message {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .error-icon {
+            font-size: 80px;
+            color: var(--primary);
+            margin-bottom: 24px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <section class="error-page">
+        <div class="error-content">
+            <i class="ri-ghost-line error-icon"></i>
+            <div class="error-code">404</div>
+            <h1 class="error-title">Page Not Found</h1>
+            <p class="error-message">
+                Oops! The page you're looking for seems to have teleported to another dimension.
+            </p>
+            <div class="error-actions">
+                <a href="index.html" class="btn btn-primary">
+                    <i class="ri-home-line"></i>
+                    Go Home
+                </a>
+                <a href="docs.html" class="btn btn-outline">
+                    <i class="ri-book-line"></i>
+                    Documentation
+                </a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
