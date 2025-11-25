@@ -317,7 +317,7 @@ function connectWebSocket() {
     connectionStatus.querySelector('.status-text').textContent = 'Connecting...';
     
     try {
-        ws = new WebSocket(`ws://${API_SERVER_URL}/ws`);
+        ws = new WebSocket(`wss://${API_SERVER_URL}/ws`);
         
         ws.onopen = () => {
             console.log('Connected to API server');
